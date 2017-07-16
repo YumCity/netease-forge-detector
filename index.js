@@ -62,7 +62,7 @@ async function main() {
       console.log(`delete file: ${path}`);
       continue;
     }
-    if (NETEASE_MAP.get(path).hash === res.hash) {
+    if (NETEASE_MAP.get(path).hash !== res.hash) {
       console.log(`modify file: ${path}`);
     }
   }
