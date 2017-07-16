@@ -38,7 +38,7 @@ async function main() {
     let same = 0;
     for(const [path, res] of map) {
       if (!NETEASE_MAP.has(path)) continue;
-      if (NETEASE_MAP.get(path).hash === res.hash) same ++;
+      if (NETEASE_MAP.get(path) === res) same ++;
     }
     const percent = same / map.size;
     PERCENT.set(forge.version, {
@@ -62,7 +62,7 @@ async function main() {
       console.log(`delete file: ${path}`);
       continue;
     }
-    if (NETEASE_MAP.get(path).hash !== res.hash) {
+    if (NETEASE_MAP.get(path) !== res) {
       console.log(`modify file: ${path}`);
     }
   }
