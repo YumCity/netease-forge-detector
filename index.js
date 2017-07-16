@@ -60,6 +60,7 @@ async function main() {
   for(const [path, res] of mostSame) {
     if (!NETEASE_MAP.has(path)) {
       console.log(`delete file: ${path}`);
+      continue;
     }
     if (NETEASE_MAP.get(path).hash === res.hash) {
       console.log(`modify file: ${path}`);
