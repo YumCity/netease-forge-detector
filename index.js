@@ -45,6 +45,7 @@ async function main() {
       percent,
       same,
       size: map.size,
+      map,
     });
     p.succeed(`${forge.version},${percent}`)
   });
@@ -55,7 +56,7 @@ async function main() {
   });
   table.forEach((e) => cliTable.push(e));
   console.log(cliTable.toString());
-  const mostSame = PERCENT.get(table[table.length - 1][0]);
+  const mostSame = PERCENT.get(table[table.length - 1][0]).map;
   for(const [path, res] of mostSame) {
     if (!NETEASE_MAP.has(path)) {
       console.log(`delete file: ${path}`);
