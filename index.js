@@ -28,7 +28,7 @@ async function main() {
   p.succeed();
   console.log(`总计${forgeVersionList.length}个版本`);
   await Promise.map(forgeVersionList, async (forge) => {
-    if (!forge.version.startsWith('11.15')) return;
+    // if (!forge.version.startsWith('11.15')) return;
     let p = ora(`下载Forge： ${forge.version}`).start();
     const body = await downloadForge(forge.build);
     p.succeed();
