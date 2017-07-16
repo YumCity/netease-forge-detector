@@ -48,12 +48,27 @@ async function main() {
     });
     p.succeed(`${forge.version},${percent}`)
   });
-  const table = [...PERCENT.entries()].sort(([, a],[, b]) => a.percent - b.percent);
+  const table = [...PERCENT.entries()].sort(([, a],[, b]) => a.percent - b.percent)
+    .map(([version, e]) => [version, e.percent, e.same, e.size]);
   const cliTable = new CliTable({
     head: ['版本', '相似度', '相同文件数', '文件总数'],
   });
   table.forEach((e) => cliTable.push(e));
   console.log(cliTable.toString());
+  const mostSame = PERCENT.get(table[table.length - 1][0]);
+  for(const [path, res] of mostSame) {
+    if (!NETEASE_MAP.has(path)) {
+      console.log(`delete file: ${path}`);
+    }
+    if (NETEASE_MAP.get(path).hash === res.hash) {
+      console.log(`modify file: ${path}`);
+    }
+  }
+  for(const [path, res] of NETEASE_MAP) {
+    if (!mostSame.has(path)){
+      console.log(`new file: ${path}`);
+    }
+  }
 }
 
 main().catch((err) => {
